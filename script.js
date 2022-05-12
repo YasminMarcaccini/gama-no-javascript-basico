@@ -19,11 +19,21 @@ function validaCPF(cpf){
 
         var soma = 0;
 
+        //Validando o primeiro dígito verificador
+
         for (i = 10; i > 1; i--){
             soma += numerosCPF.charAt(10 -i) * i;
         };
 
         console.log(soma);
+
+        var resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+
+        if(resultado != digitoVerificador.charAt(0)) {
+            return false;
+        }
+
+        console.log(digitoVerificador.toString().charAt(0) + " é a primeira posição da variável soma");
 
         return true;
     };
