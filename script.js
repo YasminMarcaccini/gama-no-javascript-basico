@@ -1,7 +1,7 @@
 console.log("Iniciando meu JavaScript");
 
 function validaCPF(cpf){
-    console.log(cpf.length);
+    console.log("O seu CPF tem " + cpf.length + " dígitos");
     //inserir validação do tamanho do cpf
     if(cpf.length != 11){
         //inserir ação caso o cpf não tenha 11 dígitos
@@ -33,7 +33,27 @@ function validaCPF(cpf){
             return false;
         }
 
-        console.log(digitoVerificador.toString().charAt(0) + " é a primeira posição da variável soma");
+        console.log(digitoVerificador.toString().charAt(0) + " é a posição do primeiro dígito verificador");
+
+        //Validando o segundo dígito verificador
+
+        soma = 0;
+
+        numerosCPF = cpf.substring(0,10);
+
+        for (k = 11; k > 1; k--){
+            soma += numerosCPF.charAt(11 -k) * k;
+        };
+
+        console.log(soma);
+
+        resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+
+        if(resultado != digitoVerificador.charAt(1)) {
+            return false;
+        }
+
+        console.log(digitoVerificador.toString().charAt(1) + " é a posição do segundo dígito verificador");
 
         return true;
     };
@@ -41,6 +61,11 @@ function validaCPF(cpf){
 
 function validacao(){
     console.log("Iniciando a validação do CPF");
+
+    //Limpando o histórico
+
+    document.getElementById("success").style.display = "none";
+    document.getElementById("error").style.display = "none";
     
     var cpf = document.getElementById("cpf_digitado").value;
 
