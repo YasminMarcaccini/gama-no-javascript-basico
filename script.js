@@ -8,12 +8,30 @@ function validaCPF(cpf){
         return false;
     }
     else{
+        
+        var numerosCPF = cpf.substring(0,9);
+
+        var digitoVerificador = cpf.substring(9);
+
+        console.log("Os números do seu CPF são " + numerosCPF);
+
+        console.log("Seu dígito verificador é " + digitoVerificador);
+
+        var soma = 0;
+
+        for (i = 10; i > 1; i--){
+            soma += numerosCPF.charAt(10 -i) * i;
+        };
+
+        console.log(soma);
+
         return true;
     };
 }
 
 function validacao(){
     console.log("Iniciando a validação do CPF");
+    
     var cpf = document.getElementById("cpf_digitado").value;
 
     var resultadoValidacao = validaCPF(cpf);
